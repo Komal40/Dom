@@ -42,6 +42,11 @@ function onSubmit(e){
     }
     else{
         console.log(nameInp.value+", "+email.value+", "+phn.value+", "+date.value+", "+time.value);
+        localStorage.setItem('name', nameInp.value)
+        localStorage.setItem('email', email.value)
+        localStorage.setItem('phone',phn.value )
+        localStorage.setItem('Date', date.value)
+        localStorage.setItem('Time', time.value)
     }
 }
 

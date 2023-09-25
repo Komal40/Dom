@@ -49,7 +49,7 @@ header.style.borderBottom='solid 3px #000';
 
 
 //traversing dom
-var itemList=document.querySelector('#items')
+// var itemList=document.querySelector('#items')
 // console.log(itemList.parentNode.parentNode.parentNode)
 // itemList.parentNode.style.backgroundColor='yellow'
 
@@ -77,33 +77,110 @@ var itemList=document.querySelector('#items')
 
 
 
-//ADD HELLO WORD BEFORE ITEM LISTER
-var newDiv=document.createElement('div')
-// newDiv.className='Hello'
-// newDiv.id='hii'
+// //ADD HELLO WORD BEFORE ITEM LISTER
+// var newDiv=document.createElement('div')
+// // newDiv.className='Hello'
+// // newDiv.id='hii'
 
-// newDiv.setAttribute('title', 'hello')
-var newDivText=document.createTextNode('HELLO')
-newDiv.appendChild(newDivText)
+// // newDiv.setAttribute('title', 'hello')
+// var newDivText=document.createTextNode('HELLO')
+// newDiv.appendChild(newDivText)
 
-var container=document.querySelector('header .container')
-var h1=document.querySelector('header h1')
+// var container=document.querySelector('header .container')
+// var h1=document.querySelector('header h1')
 
-// console.log(newDiv)
-container.insertBefore(newDiv, h1)
+// // console.log(newDiv)
+// container.insertBefore(newDiv, h1)
 
 
 
 
 //ADD HELLO WORD BEFORE ITEM 1
-var newli=document.createElement('li')
-newli.className='list-group-item'
-var newliText=document.createTextNode('Hello')
-newli.appendChild(newliText)
+// var newli=document.createElement('li')
+// newli.className='list-group-item'
+// var newliText=document.createTextNode('Hello')
+// newli.appendChild(newliText)
 
-var list=document.querySelector('ul.list-group')
-var li=document.querySelector('ul.list-group li')
-list.insertBefore(newliText, li)
+// var list=document.querySelector('ul.list-group')
+// var li=document.querySelector('ul.list-group li')
+// list.insertBefore(newliText, li)
 
 
-console.log(newli)
+// console.log(newli)
+
+
+
+
+
+
+
+
+
+
+
+//FILTERING ELEMENTS:
+
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+
+
+var filter=document.getElementById('filter')
+
+form.addEventListener('submit', addItem);
+itemList.addEventListener('click', removeItem);
+filter.addEventListener('keyup', filterItems);
+
+function addItem(e){
+    e.preventDefault();
+    var newItem=document.getElementById('item').value
+    var newItem2=document.getElementById('item2').value
+    var li=document.createElement('li');
+    li.className='list-group-item';
+    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(newItem2));
+
+
+    //delete btn
+    var deleteBtn=document.createElement('button');
+    deleteBtn.className='btn btn-danger btn-sm float-right delete';
+    deleteBtn.appendChild(document.createTextNode('X'));
+
+    li.appendChild(deleteBtn);
+    itemList.appendChild(li);
+
+
+    //edit btn
+    var editBtn=document.createElement('button');
+    editBtn.className='btn btn-secondary btn-sm float-right';
+    editBtn.appendChild(document.createTextNode('EDIT'));
+    li.appendChild(editBtn);
+    itemList.appendChild(li);
+
+}
+
+
+function removeItem(e){
+    e.preventDefault();
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are you sure')){
+            var li=e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+}
+
+
+function filterItems(e){
+    var text=e.target.value.toLowerCase();
+    var items=itemList.getElementsByTagName('li');
+
+    Array.from(items).forEach(function(item){
+        var itemName=item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text)!=-1 ){
+            item.style.display='block';
+        }
+        else{
+            item.style.display='none';
+        }
+    })
+}

@@ -41,12 +41,13 @@ function onSubmit(e){
         setTimeout(()=>msg.remove(), 3000);
     }
     else{
-        console.log(nameInp.value+", "+email.value+", "+phn.value+", "+date.value+", "+time.value);
-        localStorage.setItem('name', nameInp.value)
-        localStorage.setItem('email', email.value)
-        localStorage.setItem('phone',phn.value )
-        localStorage.setItem('Date', date.value)
-        localStorage.setItem('Time', time.value)
+        // console.log(nameInp.value+", "+email.value+", "+phn.value+", "+date.value+", "+time.value);
+        let user={
+            name:nameInp.value,
+            email:email.value,
+            phn:phn.value
+        }
+        localStorage.setItem('userDetails', JSON.stringify(user))
     }
 }
 
